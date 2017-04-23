@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace LandsSystem.Data
     {
         public int Id { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
         public double Price { get; set; }
@@ -25,7 +27,7 @@ namespace LandsSystem.Data
         
         public int LivingRooms { get; set; }
 
-        public int Bathroom { get; set; }
+        public int Bathrooms { get; set; }
 
         public bool HaveBasement { get; set; }
 
@@ -33,7 +35,7 @@ namespace LandsSystem.Data
 
         public bool HaveGarage { get; set; }
 
-        public int? PrakSlots { get; set; }
+        public int? ParkSlots { get; set; }
 
         public virtual List<HouseAdvertise> HouseAdvertises { get; set; } = new List<HouseAdvertise>();
     }

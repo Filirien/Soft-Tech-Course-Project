@@ -13,7 +13,7 @@ namespace LandsSystem.Data
 
         public string Description { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public bool IsDeleted { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿namespace LandsSystem.Data
 {
+    using LandsSystem.Migrations;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System.Data.Entity;
 
@@ -8,13 +9,16 @@
         public LandsDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<>)
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LandsDbContext, Configuration>());
         }
 
         public virtual DbSet<Apartment> Apartments { get; set; }
         public virtual DbSet<House> Houses { get; set; }
         public virtual DbSet<Land> Lands { get; set; }
-        public virtual DbSet<HouseAdvertise> Advertises { get; set; }
+        public virtual DbSet<HouseAdvertise> HouseAdvertises { get; set; }
+        public virtual DbSet<ApartmentAdvertise> ApartmentAdvertises { get; set; }
+        public virtual DbSet<LandAdvertise> LandAdvertises { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
