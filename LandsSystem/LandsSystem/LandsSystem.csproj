@@ -191,13 +191,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Data\ApartmentAdvertise.cs" />
+    <Compile Include="Data\LandAdvertise.cs" />
+    <Compile Include="Data\HouseAdvertise.cs" />
     <Compile Include="Data\Apartment.cs" />
     <Compile Include="Data\House.cs" />
     <Compile Include="Data\Land.cs" />
-    <Compile Include="Data\Property.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\LandsDbContext.cs" />

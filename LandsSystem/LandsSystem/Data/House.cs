@@ -5,8 +5,14 @@ using System.Web;
 
 namespace LandsSystem.Data
 {
-    public class House:Property
+    public class House
     {
+        public int Id { get; set; }
+
+        public string Address { get; set; }
+
+        public double Price { get; set; }
+
         public int YearOfBuilt { get; set; }
 
         public double LandArea { get; set; }
@@ -27,7 +33,8 @@ namespace LandsSystem.Data
 
         public bool HaveGarage { get; set; }
 
-        public int PrakSlots { get; set; }
+        public int? PrakSlots { get; set; }
 
+        public virtual List<HouseAdvertise> HouseAdvertises { get; set; } = new List<HouseAdvertise>();
     }
 }
