@@ -1,0 +1,16 @@
+﻿@model IEnumerable<LandsSystem.Models.HouseBuyModel>
+
+@{
+    ViewBag.Title = "Houses";
+}
+
+<div class="row">
+    @foreach (var house in Model)
+    {
+        <div class="col-sm-4">
+            <h4>@house.HouseAddress</h4>
+            <h4>@house.HousePrice</h4>
+        </div>
+        <br />
+    }
+</div>
