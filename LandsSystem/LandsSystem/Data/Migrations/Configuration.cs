@@ -64,7 +64,7 @@ namespace LandsSystem.Migrations
             //Seed Lands
             if (!context.Lands.Any())
             {
-                CreateLand(context, "София, кв. Дружба", 60000 , 811, false, true,true,"");
+                CreateLand(context, "София, кв. Дружба", 60000 , 811, false, true,true, "http://crosspoint.bg/files/offer/08680-01.JPG");
                 CreateLand(context, "с.Волуяк", 71000, 3000, false, false, false, "http://photos.wikimapia.org/p/00/03/94/36/49_big.jpg");
                 CreateLand(context, "София, кв. Надежда", 50000, 732, true, true, true, "http://static.imot.bg/photosimotbg/1/451/big/1r148551731220451_1.pic");
                 CreateLand(context, "София, кв. Банишора", 32000, 400, true, true, false, "http://www.arenareal.bg/properties/165/132749240260511.jpg");

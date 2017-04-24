@@ -24,6 +24,7 @@ namespace LandsSystem.Controllers
                 .OrderBy(h => h.Id)
                 .Select(h => new HouseBuyModel
                 {
+                    HouseImageUrl = h.ImageUrl,
                     HouseAddress = h.Address,
                     HousePrice = h.Price
                 })
@@ -40,6 +41,7 @@ namespace LandsSystem.Controllers
                 .OrderBy(a => a.Id)
                 .Select(a => new ApartmentBuyModel
                 {
+                    ApartmentImageUrl = a.ImageUrl,
                     ApartmentAddress = a.Address,
                     ApartmentPrice = a.Price
                 })
@@ -56,6 +58,7 @@ namespace LandsSystem.Controllers
                 .OrderBy(a => a.Id)
                 .Select(l => new LandBuyModel
                 {
+                    LandImageUrl = l.ImageUrl,
                     LandAddress = l.Address,
                     LandPrice = l.Price
                 })

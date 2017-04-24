@@ -7,10 +7,10 @@
 <div class="row">
     @foreach (var house in Model)
     {
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin: 50px">
+            <img class="img-responsive" src="@house.HouseImageUrl" />
             <h4>@house.HouseAddress</h4>
             <h4>@house.HousePrice</h4>
         </div>
-        <br />
     }
 </div>
