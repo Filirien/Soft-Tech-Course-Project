@@ -1,7 +1,23 @@
-﻿
+﻿@model LandsSystem.Models.HouseCreateModel
+
 @{
-    ViewBag.Title = "Homes";
+    ViewBag.Title = "Sell House";
 }
+@using (Html.BeginForm("Sell", "Houses", FormMethod.Post))
+{
+    <br />
+    <div>
+        <h4 class="lead">Address</h4>
+        <input type="text" placeholder="Address" required>
 
-<h2>Home</h2>
+        <h4>Price</h4>
+        <input type="text" placeholder="Price" required>
 
+        <h4>Year of built</h4>
+        <input type="text" placeholder="Year of build" required>
+
+        <br/>
+        <input type="submit" value="Save house" />
+
+    </div>
+}
