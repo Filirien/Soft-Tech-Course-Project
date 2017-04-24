@@ -41,34 +41,34 @@ namespace LandsSystem.Migrations
             //Seed Houses
             if (!context.Houses.Any())
             {
-                CreateHouse(context, "София, ул. Лале 5", 50000, 2002, 266, 66, 1, 2, 1, 1, false, false, false, 2);
-                CreateHouse(context, "Видин, ул. Войвода 6", 48200, 1996, 310, 80, 1, 2, 1, 2, false, false, false, 1);
-                CreateHouse(context, "София, ул. Хризантема 2", 80000, 2002, 490, 98, 2, 2, 1, 2, false, false, false, 2);
-                CreateHouse(context, "София, ул. Дъга 5", 350000, 2012, 1088, 240, 3, 7, 3, 3, true, true, true, 5);
-                CreateHouse(context, "Варна, ул. Слънце 8", 150000, 2008, 766, 130, 2, 4, 3, 2, false, true, false, 2);
-                CreateHouse(context, "Бургас, ул. Лазур 24", 230000, 2017, 600, 120, 2, 5, 2, 2, true, true, true, 1);
-                CreateHouse(context, "София, ул. Алабин 13", 120000, 2002, 440, 82, 2, 2, 1, 1, false, false, false, 0);
+                CreateHouse(context, "София, ул. Лале 5", 50000, 2002, 266, 66, 2, 2, 1, 1, false, false, false, 2, "http://www.alo.bg/user_files/f/foxestate/4722463_87783425_big.jpg");
+                CreateHouse(context, "Видин, ул. Войвода 6", 48200, 1996, 310, 80, 1, 2, 1, 2, false, false, false, 1, "http://проектикъщи.com/wp-content/uploads/2012/02/mira-60-02-new3-1024x575.jpg");
+                CreateHouse(context, "София, ул. Хризантема 2", 80000, 2002, 490, 98, 2, 2, 1, 2, false, false, true, 2, "http://studiocreative.bg/render/w1024-q90/2.projects/63.%D0%B4%D0%B2%D1%83%D0%B5%D1%82%D0%B0%D0%B6%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B0-66/H_66_cam1f.jpg");
+                CreateHouse(context, "София, ул. Дъга 5", 350000, 2012, 1088, 240, 3, 7, 3, 3, true, true, true, 5, "http://www.alo.bg/user_files/e/elekra/3677558_66108756_big.jpg");
+                CreateHouse(context, "Варна, ул. Слънце 8", 150000, 2008, 766, 130, 2, 4, 3, 2, false, false, true, 2, "https://arhitekt-plovdiv.com/%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-%D0%B7%D0%B0-%D0%B4%D0%B2%D1%83%D0%B5%D1%82%D0%B0%D0%B6%D0%BD%D0%B0-%D0%BA%D1%8A%D1%89%D0%B0-%D0%B2-%D1%81%D0%BC%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D0%BE-%D0%BE%D0%B1%D1%89%D0%B8%D0%BD%D0%B0-%D1%80%D0%BE%D0%B4%D0%BE%D0%BF%D0%B8#");
+                CreateHouse(context, "Бургас, ул. Лазур 24", 230000, 2017, 600, 120, 2, 5, 2, 2, true, true, true, 1, "http://bg.foxestate-bg.com/wp-content/uploads/crm/f75be5430399589577eaca069c62da78.jpg");
+                CreateHouse(context, "София, ул. Алабин 13", 120000, 2002, 440, 82, 2, 2, 1, 1, false, false, false, 0, "http://www.accentinvest.com/ibank/g/3_GenD_00290.jpg");
             }
 
 
             //Seed Apartments
             if (!context.Apartments.Any())
             {
-                CreateApartment(context, "София, кв. Обеля, бл. 24", 288000, 2017, 140, 3, 3, 2, 2, 11, true, true, true, 1);
-                CreateApartment(context, "София, кв. Лозенец, бл. 18", 218000, 2009, 113, 5, 2, 1, 1, 0, true, true, true, 0);
-                CreateApartment(context, "София, кв. Свобода, бл. 32", 100000, 1988, 75, 2, 1, 1, 1, 0, true, true, false, 1);
-                CreateApartment(context, "София, кв. Младост, бл. 30", 188000, 2003, 155, 1, 1, 1, 1, 0, false, false, false, 1);
-                CreateApartment(context, "София, кв. Дружба, бл. 238", 128000, 1992, 95, 8, 2, 1, 1, 0, true, true, false, 1);
+                CreateApartment(context, "София, кв. Обеля, бл. 24", 288000, 2017, 140, 3, 3, 2, 2, 11, true, true, true, 1, "http://besthomenews.eu/wp-content/uploads/2009/09/luksozen-apartament-s-italianski-mebeli.jpg");
+                CreateApartment(context, "София, кв. Лозенец, бл. 18", 218000, 2009, 113, 5, 2, 1, 1, 0, true, true, true, 0, "http://img.us2.bultourism.net/pictures/382/382_main_medium.jpg");
+                CreateApartment(context, "София, кв. Свобода, бл. 32", 100000, 1988, 75, 2, 1, 1, 1, 0, true, true, false, 1, "http://s.rozali.com/p/d/e/dekor-dom-stil-(2)-96156-500x0.jpg");
+                CreateApartment(context, "София, кв. Младост, бл. 30", 188000, 2003, 155, 2, 1, 1, 1, 0, false, false, false, 1, "https://s-media-cache-ak0.pinimg.com/originals/a9/cd/8d/a9cd8d346a802266972bef284b93412a.jpg");
+                CreateApartment(context, "София, кв. Дружба, бл. 238", 128000, 1992, 95, 8, 2, 1, 1, 0, true, true, false, 1, "http://nox.bg/images/listings/2016-08-30/GeneralInvest-1472559127-d_pic.jpg");
             }
 
             //Seed Lands
             if (!context.Lands.Any())
             {
-                CreateLand(context, "София, кв. Дружба", 60000 , 811, false, true,true);
-                CreateLand(context, "с. Волуяк", 71000, 950, false, false, false);
-                CreateLand(context, "София, кв. Надежда", 50000, 732, true, true, true);
-                CreateLand(context, "София, кв. Банишора", 32000, 400, true, true, false);
-                CreateLand(context, "София, кв. Обеля", 90000, 1105, true, true, true);
+                CreateLand(context, "София, кв. Дружба", 60000 , 811, false, true,true,"");
+                CreateLand(context, "с.Волуяк", 71000, 3000, false, false, false, "http://photos.wikimapia.org/p/00/03/94/36/49_big.jpg");
+                CreateLand(context, "София, кв. Надежда", 50000, 732, true, true, true, "http://static.imot.bg/photosimotbg/1/451/big/1r148551731220451_1.pic");
+                CreateLand(context, "София, кв. Банишора", 32000, 400, true, true, false, "http://www.arenareal.bg/properties/165/132749240260511.jpg");
+                CreateLand(context, "София, кв. Обеля", 90000, 1105, true, true, true, "http://www.alo.bg/user_files/g/geobul/3745090_67395231_big.jpg");
             }
 
 
@@ -172,7 +172,7 @@ namespace LandsSystem.Migrations
             context.SaveChanges();
         }
 
-        private void CreateApartment(LandsDbContext context, string address, int price, int yearOfBuild, int apartmentArea, int floors, int bedrooms, int livingRooms, int bathrooms, int terraceArea, bool haveBasement, bool haveElevator, bool haveGarage, int parkSlots)
+        private void CreateApartment(LandsDbContext context, string address, int price, int yearOfBuild, int apartmentArea, int floors, int bedrooms, int livingRooms, int bathrooms, int terraceArea, bool haveBasement, bool haveElevator, bool haveGarage, int parkSlots, string imageUrl)
         {
             Apartment apartment = new Apartment()
             {
@@ -188,13 +188,15 @@ namespace LandsSystem.Migrations
                 HaveBasement = haveBasement,
                 HaveElevator = haveElevator,
                 HaveGarage = haveGarage,
-                PrakSlots = parkSlots
+                ParkSlots = parkSlots,
+                ImageUrl = imageUrl
+
             };
             context.Apartments.Add(apartment);
             context.SaveChanges();
         }
 
-        private void CreateHouse(LandsDbContext context, string address, int price, int yearOfBuild, int landArea, int houseArea, int floors, int bedrooms, int livingRooms, int bathrooms, bool haveBasement, bool havePool, bool haveGarage, int parkSlots)
+        private void CreateHouse(LandsDbContext context, string address, int price, int yearOfBuild, int landArea, int houseArea, int floors, int bedrooms, int livingRooms, int bathrooms, bool haveBasement, bool havePool, bool haveGarage, int parkSlots, string imageUrl)
         {
             House house = new House()
             {
@@ -210,13 +212,15 @@ namespace LandsSystem.Migrations
                 HaveBasement = haveBasement,
                 HavePool = havePool,
                 HaveGarage = haveGarage,
-                ParkSlots = parkSlots
+                ParkSlots = parkSlots,
+                ImageUrl = imageUrl
+
             };
             context.Houses.Add(house);
             context.SaveChanges();
         }
 
-        private void CreateLand(LandsDbContext context, string address, int price, int area, bool electricity, bool water, bool sewage)
+        private void CreateLand(LandsDbContext context, string address, int price, int area, bool electricity, bool water, bool sewage, string imageUrl)
         {
 
             Land land = new Land()
@@ -226,7 +230,8 @@ namespace LandsSystem.Migrations
                 Area = area,
                 Electricity = electricity,
                 Water = water,
-                Sewage = sewage
+                Sewage = sewage,
+                ImageUrl=imageUrl
             };
             context.Lands.Add(land);
             context.SaveChanges();

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace LandsSystem.Data
+﻿
+namespace LandsSystem.Models
 {
-    public class Apartment
-    {
-        public int Id { get; set; }
+    using System.ComponentModel.DataAnnotations;
 
+    public class ApartmentCreateModel
+    {
+        [Required]
         public string Address { get; set; }
 
+        [MaxLength(100)]
+        public string Description { get; set; }
+        
         public double Price { get; set; }
 
         public int YearOfBuilt { get; set; }
@@ -35,8 +35,8 @@ namespace LandsSystem.Data
 
         public int ParkSlots { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
 
-        public virtual List<ApartmentAdvertise> ApartmentAdvertises { get; set; } = new List<ApartmentAdvertise>();
     }
 }
