@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace LandsSystem.Data
+﻿namespace LandsSystem.Models
 {
-    public class House
-    {
-        public int Id { get; set; }
+    using System.ComponentModel.DataAnnotations;
 
+    public class HouseCreateModel
+    {
         [Required]
         public string Address { get; set; }
+
+        [Required]
+        public string Description { get; set; }
 
         public double Price { get; set; }
 
@@ -24,7 +21,7 @@ namespace LandsSystem.Data
         public int Floors { get; set; }
 
         public int Bedrooms { get; set; }
-        
+
         public int LivingRooms { get; set; }
 
         public int Bathrooms { get; set; }
@@ -38,7 +35,5 @@ namespace LandsSystem.Data
         public int? ParkSlots { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public virtual List<HouseAdvertise> HouseAdvertises { get; set; } = new List<HouseAdvertise>();
     }
 }

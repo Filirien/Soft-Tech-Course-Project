@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace LandsSystem.Data
+namespace LandsSystem.Models
 {
-    public class Land
+    public class LandCreateModel
     {
-        public int Id { get; set; }
-
+        [Required]
         public string Address { get; set; }
+
+        [Required]
+        public string Description { get; set; }
 
         public double Price { get; set; }
 
@@ -22,7 +25,5 @@ namespace LandsSystem.Data
         public bool Sewage { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public virtual List<LandAdvertise> LandAdvertises { get; set; } = new List<LandAdvertise>();
     }
 }
