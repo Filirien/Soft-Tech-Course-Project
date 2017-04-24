@@ -33,7 +33,7 @@ namespace LandsSystem.Controllers
             return View(houses);
         }
 
-        public ActionResult Apartmnets()
+        public ActionResult Apartments()
         {
             var db = new LandsDbContext();
 
@@ -65,6 +65,21 @@ namespace LandsSystem.Controllers
                 .ToList();
 
             return View(lands);
+        }
+
+        public ActionResult HouseDetails()
+        {
+            return View();
+        }
+
+        public ActionResult ApartmentDetails()
+        {
+            return View();
+        }
+
+        public ActionResult LandDetails()
+        {
+            return View();
         }
     }
 }
