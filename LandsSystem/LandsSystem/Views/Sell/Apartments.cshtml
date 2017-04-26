@@ -1,7 +1,141 @@
 ﻿
+@model LandsSystem.Models.ApartmentCreateModel
+
 @{
     ViewBag.Title = "Apartments";
 }
 
-<h2>Apartments</h2>
 
+
+@using (Html.BeginForm("Sell", "Apartments", FormMethod.Post))
+{
+    <div id="content" style="min-height:calc(100vh - 80px); padding-bottom:100px;">
+        <div class="container hidden-xs">
+            <h1 class="title text-center">Fill the information below:</h1>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-md-offset-2">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Address<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:20px">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Price<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Year Of Build<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Apartment Area<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Floors<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Bedrooms<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Living Rooms<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Bathrooms<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Terrace Area<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Park Slots<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="number" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                Image URL<span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <input type="text" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label text-right" style="margin-top:5px">
+                                <span class="required-marking"></span>
+                            </label>
+                            <div class="col-sm-8" style="margin-bottom:15px">
+                                <label><input type="checkbox" name="personality"> Basement</label>
+                                <label><input type="checkbox" name="personality"> Elevator</label>
+                                <label><input type="checkbox" name="personality"> Garage</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-7 control-label text-right">
+                            </label>
+                            <div class="col-offset-7 col-sm-4">
+                                <a href="/Sell" class="btn btn-default">Back</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+}
