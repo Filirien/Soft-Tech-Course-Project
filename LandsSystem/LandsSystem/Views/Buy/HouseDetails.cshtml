@@ -1,0 +1,28 @@
+﻿@model LandsSystem.Models.BuyDetailsModel.HouseDetailsModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row mt-60">
+    <div class="col-md-6">
+        <img src="@Model.ImageUrl" class="img-responsive" />
+    </div>
+    <div class="col-md-3">
+        <p class="text-center breadcrumb">@Model.Address (@Model.YearOfBuilt)</p>
+        <p class="text-center breadcrumb">Land Area: @Model.LandArea m&#178;</p>
+        <p class="text-center breadcrumb">House Area: @Model.HouseArea m&#178;</p>
+        <p class="text-center breadcrumb">Floors: @Model.Floors</p>
+        <p class="text-center breadcrumb">Livingrooms: @Model.LivingRooms</p>
+        <p class="text-center breadcrumb">Bedrooms: @Model.Bedrooms</p>
+    </div>
+    <div class="col-md-3">
+        <p class="text-center breadcrumb">Bathrooms: @Model.Bathrooms</p>
+        <p class="text-center breadcrumb">Park Slots: @Model.ParkSlots</p>
+        <p class="text-center breadcrumb">Basemnet: @Model.HaveBasement</p>
+        <p class="text-center breadcrumb">Garage: @Model.HaveGarage</p>
+        <p class="text-center breadcrumb">Pool: @Model.HavePool</p>
+        <p class="text-center breadcrumb">@Model.Price BGN</p>
+        <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+    </div>
+</div>

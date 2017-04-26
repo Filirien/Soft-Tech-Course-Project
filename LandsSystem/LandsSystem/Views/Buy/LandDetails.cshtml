@@ -1,0 +1,22 @@
+﻿@model LandsSystem.Models.BuyDetailsModel.LandDetailsModel
+
+@{
+    ViewBag.Title = "LandDetails";
+}
+
+<div class="row mt-60">
+    <div class="col-md-6">
+        <img src="@Model.ImageUrl" class="img-responsive" />
+    </div>
+    <div class="col-md-3">
+        <p class="text-center breadcrumb">@Model.Address</p>
+        <p class="text-center breadcrumb">Land Area: @Model.Area m&#178;</p>
+        <p class="text-center breadcrumb">Electricity: @Model.Electricity</p>
+    </div>
+    <div class="col-md-3">
+        <p class="text-center breadcrumb">Water: @Model.Water</p>
+        <p class="text-center breadcrumb">Sewage: @Model.Sewage</p>
+        <p class="text-center breadcrumb">@Model.Price BGN</p>
+        <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+    </div>
+</div>

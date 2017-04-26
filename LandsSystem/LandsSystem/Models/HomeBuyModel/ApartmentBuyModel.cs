@@ -15,6 +15,10 @@ namespace LandsSystem.Models.HomeBuyModel
 
         public int ApartmentYearOfBuilt { get; set; }
 
+        public double ApartmentArea { get; set; }
+
+        public int TerraceArea { get; set; }
+
         public string ApartmentImageUrl { get; set; }
     }
 }

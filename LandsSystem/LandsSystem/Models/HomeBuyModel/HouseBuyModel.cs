@@ -9,6 +9,10 @@
 
         public int HouseYearOfBuilt { get; set; }
 
+        public double LandArea { get; set; }
+
+        public double HouseArea { get; set; }
+
         public string HouseImageUrl { get; set; }
     }
 }

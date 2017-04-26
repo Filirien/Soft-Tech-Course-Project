@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -206,6 +207,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\LandsDbContext.cs" />
+    <Compile Include="Models\BuyDetailsModel\ApartmentDetailsModel.cs" />
+    <Compile Include="Models\BuyDetailsModel\HouseDetailsModel.cs" />
+    <Compile Include="Models\BuyDetailsModel\LandDetailsModel.cs" />
     <Compile Include="Models\HomeBuyModel\ApartmentBuyModel.cs" />
     <Compile Include="Models\HomeBuyModel\HouseBuyModel.cs" />
     <Compile Include="Models\HomeBuyModel\LandBuyModel.cs" />
@@ -281,7 +285,9 @@
     <Content Include="Views\Sell\Lands.cshtml" />
     <Content Include="Views\Sell\Index.cshtml" />
     <Content Include="Views\Buy\Apartments.cshtml" />
-    <Content Include="Views\Buy\Details.cshtml" />
+    <Content Include="Views\Buy\HouseDetails.cshtml" />
+    <Content Include="Views\Buy\ApartmentDetails.cshtml" />
+    <Content Include="Views\Buy\LandDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

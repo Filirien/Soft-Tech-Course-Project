@@ -1,16 +1,21 @@
 ﻿@model IEnumerable<LandsSystem.Models.HomeBuyModel.LandBuyModel>
 
-    @{
-        ViewBag.Title = "Lands";
-    }
+@{
+    ViewBag.Title = "Lands";
+}
 
+@foreach (var land in Model)
+{
     <div class="row">
-        @foreach (var lands in Model)
-        {
-            <div class="col-sm-4" style="margin-top: 50px">
-                <img class="img-responsive" src="@lands.LandImageUrl" />
-                <h4>@lands.LandAddress</h4>
-                <h4>@lands.LandPrice</h4>
-            </div>
-        }
+        <div class="col-sm-6 mt-60">
+            <img src="@land.LandImageUrl" class="img-responsive" />
+        </div>
+        <div class="col-sm-6 mt-60">
+            <p class="text-left breadcrumb">@land.LandAddress</p>
+            <p class="text-left breadcrumb">Land Area: @land.Area m&#178;</p>
+            <p class="text-left breadcrumb">@land.LandPrice BGN</p>
+            <br />
+            <a href="/Buy/LandDetails/@land.Id" class="btn btn-success">More Info &raquo;</a>
+        </div>
     </div>
+}

@@ -4,13 +4,19 @@
     ViewBag.Title = "Apartments";
 }
 
-<div class="row">
-    @foreach (var apartment in Model)
-    {
-        <div class="col-sm-4">
-            <img class="img-responsive" src="@apartment.ApartmentImageUrl" />
-            <h4>@apartment.ApartmentAddress</h4>
-            <h4>@apartment.ApartmentPrice</h4>
+@foreach (var apartment in Model)
+{
+    <div class="row">
+        <div class="col-sm-6 mt-60">
+            <img src="@apartment.ApartmentImageUrl" class="img-responsive" />
         </div>
-    }
-</div>
+        <div class="col-sm-6 mt-60">
+            <p class="text-left breadcrumb">@apartment.ApartmentAddress (@apartment.ApartmentYearOfBuilt г.)</p>
+            <p class="text-left breadcrumb">Apartment Area: @apartment.ApartmentArea m&#178;</p>
+            <p class="text-left breadcrumb">Terrace Area: @apartment.TerraceArea m&#178;</p>
+            <p class="text-left breadcrumb">@apartment.ApartmentPrice BGN</p>
+            <br />
+            <a href="/Buy/ApartmentDetails/@apartment.Id" class="btn btn-success">More Info &raquo;</a>
+        </div>
+    </div>
+}

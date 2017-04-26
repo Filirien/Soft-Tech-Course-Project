@@ -13,6 +13,8 @@ namespace LandsSystem.Models.HomeBuyModel
 
         public double LandPrice { get; set; }
 
+        public double Area { get; set; }
+
         public string LandImageUrl { get; set; }
     }
 }
