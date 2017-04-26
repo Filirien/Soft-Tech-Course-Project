@@ -223,6 +223,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\site-background.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,14 +281,14 @@
     <Content Include="Views\Buy\Index.cshtml" />
     <Content Include="Views\Buy\Houses.cshtml" />
     <Content Include="Views\Buy\Lands.cshtml" />
-    <Content Include="Views\Sell\Houses.cshtml" />
-    <Content Include="Views\Sell\Apartments.cshtml" />
-    <Content Include="Views\Sell\Lands.cshtml" />
     <Content Include="Views\Sell\Index.cshtml" />
     <Content Include="Views\Buy\Apartments.cshtml" />
     <Content Include="Views\Buy\HouseDetails.cshtml" />
     <Content Include="Views\Buy\ApartmentDetails.cshtml" />
     <Content Include="Views\Buy\LandDetails.cshtml" />
+    <Content Include="Views\Sell\CreateLand.cshtml" />
+    <Content Include="Views\Sell\CreateApartment.cshtml" />
+    <Content Include="Views\Sell\CreateHouse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
