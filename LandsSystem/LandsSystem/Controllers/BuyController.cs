@@ -26,7 +26,8 @@ namespace LandsSystem.Controllers
                 {
                     HouseImageUrl = h.ImageUrl,
                     HouseAddress = h.Address,
-                    HousePrice = h.Price
+                    HousePrice = h.Price,
+                    HouseYearOfBuilt = h.YearOfBuilt
                 })
                 .ToList();
 
@@ -43,7 +44,8 @@ namespace LandsSystem.Controllers
                 {
                     ApartmentImageUrl = a.ImageUrl,
                     ApartmentAddress = a.Address,
-                    ApartmentPrice = a.Price
+                    ApartmentPrice = a.Price,
+                    ApartmentYearOfBuilt = a.YearOfBuilt
                 })
                 .ToList();
 
