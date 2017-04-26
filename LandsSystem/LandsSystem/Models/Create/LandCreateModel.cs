@@ -24,6 +24,7 @@ namespace LandsSystem.Models
 
         public bool Sewage { get; set; }
 
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
     }
 }
