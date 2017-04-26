@@ -67,6 +67,7 @@ namespace LandsSystem.Controllers
                 .OrderByDescending(a => a.Id)
                 .Select(l => new LandBuyModel
                 {
+                    Id = l.Id,
                     LandImageUrl = l.ImageUrl,
                     LandAddress = l.Address,
                     LandPrice = l.Price,
@@ -139,22 +140,9 @@ namespace LandsSystem.Controllers
                 })
                 .FirstOrDefault();
 
-            var apartmentAdvertise = apartment.ApartmentAdvertises
-                .Where(a => a.Id == id)
-                .Select(a => new LandAdvertise
-                {
-                    IsDeleted = a.IsDeleted
-                })
-                .FirstOrDefault();
-
             if (apartment == null)
             {
                 return HttpNotFound();
-            }
-
-            if (apartmentAdvertise.IsDeleted)
-            {
-                ViewBag.IsDeleted = true;
             }
 
             return View(apartment);
@@ -179,23 +167,10 @@ namespace LandsSystem.Controllers
                     LandAdvertises = l.LandAdvertises
                 })
                 .FirstOrDefault();
-
-            var landAdvertise = land.LandAdvertises
-                .Where(l => l.Id == id)
-                .Select(l => new LandAdvertise
-                {
-                    IsDeleted = l.IsDeleted
-                })
-                .FirstOrDefault();
-
+            
             if (land == null)
             {
                 return HttpNotFound();
-            }
-
-            if (landAdvertise.IsDeleted)
-            {
-                ViewBag.IsDeleted = true;
             }
 
             return View(land);
