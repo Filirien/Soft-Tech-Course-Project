@@ -14,10 +14,13 @@ namespace LandsSystem.Controllers
     public class BuyController : Controller
     {
         // GET: Buy
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult Houses(int page = 1, string user = null)
         {
             var db = new LandsDbContext();
@@ -45,34 +48,18 @@ namespace LandsSystem.Controllers
             return View(houses);
         }
 
+        [Authorize]
         public ActionResult Apartments(int page = 1, string user = null)
         {
-<<<<<<< HEAD
+
             using (var context = new LandsDbContext())
             {
-=======
-            var db = new LandsDbContext();
-
-            var pageSize = 5;
-
-            var apartments = db.Apartments
-                .OrderByDescending(a => a.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(a => new ApartmentBuyModel
-                {
-                    Id = a.Id,
-                    ApartmentImageUrl = a.ImageUrl,
-                    ApartmentAddress = a.Address,
-                    ApartmentPrice = a.Price,
-                    ApartmentArea = a.ApartmentArea,
-                    TerraceArea = a.TerraceArea,
-                    ApartmentYearOfBuilt = a.YearOfBuilt
-                })
-                .ToList();
->>>>>>> fbee3241c27c92268f968262288634cb1626b50f
+                var pageSize = 5;
 
                 var apartments = context.Apartments
+                    .OrderByDescending(a => a.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
                     .Select(a => new ApartmentBuyModel
                     {
                         Id = a.Id,
@@ -83,39 +70,27 @@ namespace LandsSystem.Controllers
                         TerraceArea = a.TerraceArea,
                         ApartmentYearOfBuilt = a.YearOfBuilt
                     })
-                    .OrderByDescending(a => a.Id)
                     .ToList();
+
+                ViewBag.CurrentPage = page;
 
                 return View(apartments);
             }
         }
 
+        [Authorize]
         public ActionResult Lands(int page = 1, string user = null)
         {
-<<<<<<< HEAD
+
             using (var context = new LandsDbContext())
             {
-=======
-            var db = new LandsDbContext();
 
-            var pageSize = 5;
-
-            var lands = db.Lands
-                .OrderByDescending(a => a.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(l => new LandBuyModel
-                {
-                    Id = l.Id,
-                    LandImageUrl = l.ImageUrl,
-                    LandAddress = l.Address,
-                    LandPrice = l.Price,
-                    Area = l.Area
-                })
-                .ToList();
->>>>>>> fbee3241c27c92268f968262288634cb1626b50f
+                var pageSize = 5;
 
                 var lands = context.LandAdvertises
+                    .OrderByDescending(a => a.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
                     .Select(la => new LandDetailsModel
                     {
                         LandAdId = la.Id,
@@ -130,14 +105,15 @@ namespace LandsSystem.Controllers
                         Water = la.Land.Water,
                         Sewage = la.Land.Sewage
                     })
-                    .OrderByDescending(a => a.LandId)
                     .ToList();
 
+                ViewBag.CurrentPage = page;
 
                 return View(lands);
             }
         }
 
+        [Authorize]
         public ActionResult HouseDetails(int id)
         {
             var db = new LandsDbContext();
@@ -173,6 +149,7 @@ namespace LandsSystem.Controllers
             return View(house);
         }
 
+        [Authorize]
         public ActionResult ApartmentDetails(int id)
         {
             var db = new LandsDbContext();
@@ -208,6 +185,7 @@ namespace LandsSystem.Controllers
             return View(apartment);
         }
 
+        [Authorize]
         public ActionResult LandDetails(LandDetailsModel model)
         {
 

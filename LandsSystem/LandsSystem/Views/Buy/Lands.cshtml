@@ -29,6 +29,6 @@
 }
 
 <div class="text-center mt-60">
-    <a href="/Buy/Lands?page=@(ViewBag.CurrentPage - 1)" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)">Previous <<</a>
+    <a href="/Buy/Lands?page=@(ViewBag.CurrentPage - 1)" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)"><< Previous</a>
     <a href="/Buy/Lands?page=@(ViewBag.CurrentPage + 1)" class="btn btn-success @(!Model.Any() || Model.Count() < 5 ? "disabled" : string.Empty)">Next >></a>
 </div>
