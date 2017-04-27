@@ -4,6 +4,14 @@
     ViewBag.Title = "Lands";
 }
 
+<h2 class="text-center mt-60">Lands for sale - Page @ViewBag.CurrentPage</h2>
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">No more lands!</h2>
+}
+
+
 @foreach (var land in Model)
 {
     <div class="row">
@@ -19,3 +27,8 @@
         </div>
     </div>
 }
+
+<div class="text-center mt-60">
+    <a href="/Buy/Lands?page=@(ViewBag.CurrentPage - 1)" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)">Previous <<</a>
+    <a href="/Buy/Lands?page=@(ViewBag.CurrentPage + 1)" class="btn btn-success @(!Model.Any() || Model.Count() < 5 ? "disabled" : string.Empty)">Next >></a>
+</div>

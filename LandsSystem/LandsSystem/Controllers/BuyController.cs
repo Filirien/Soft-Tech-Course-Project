@@ -18,12 +18,16 @@ namespace LandsSystem.Controllers
         {
             return View();
         }
-        public ActionResult Houses()
+        public ActionResult Houses(int page = 1, string user = null)
         {
             var db = new LandsDbContext();
 
+            var pageSize = 5;
+
             var houses = db.Houses
                 .OrderByDescending(h => h.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .Select(h => new HouseBuyModel
                 {
                     Id = h.Id,
@@ -36,13 +40,37 @@ namespace LandsSystem.Controllers
                 })
                 .ToList();
 
+            ViewBag.CurrentPage = page;
+
             return View(houses);
         }
 
-        public ActionResult Apartments()
+        public ActionResult Apartments(int page = 1, string user = null)
         {
+<<<<<<< HEAD
             using (var context = new LandsDbContext())
             {
+=======
+            var db = new LandsDbContext();
+
+            var pageSize = 5;
+
+            var apartments = db.Apartments
+                .OrderByDescending(a => a.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(a => new ApartmentBuyModel
+                {
+                    Id = a.Id,
+                    ApartmentImageUrl = a.ImageUrl,
+                    ApartmentAddress = a.Address,
+                    ApartmentPrice = a.Price,
+                    ApartmentArea = a.ApartmentArea,
+                    TerraceArea = a.TerraceArea,
+                    ApartmentYearOfBuilt = a.YearOfBuilt
+                })
+                .ToList();
+>>>>>>> fbee3241c27c92268f968262288634cb1626b50f
 
                 var apartments = context.Apartments
                     .Select(a => new ApartmentBuyModel
@@ -62,10 +90,30 @@ namespace LandsSystem.Controllers
             }
         }
 
-        public ActionResult Lands()
+        public ActionResult Lands(int page = 1, string user = null)
         {
+<<<<<<< HEAD
             using (var context = new LandsDbContext())
             {
+=======
+            var db = new LandsDbContext();
+
+            var pageSize = 5;
+
+            var lands = db.Lands
+                .OrderByDescending(a => a.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(l => new LandBuyModel
+                {
+                    Id = l.Id,
+                    LandImageUrl = l.ImageUrl,
+                    LandAddress = l.Address,
+                    LandPrice = l.Price,
+                    Area = l.Area
+                })
+                .ToList();
+>>>>>>> fbee3241c27c92268f968262288634cb1626b50f
 
                 var lands = context.LandAdvertises
                     .Select(la => new LandDetailsModel
