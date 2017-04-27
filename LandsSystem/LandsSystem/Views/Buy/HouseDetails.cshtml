@@ -15,15 +15,24 @@
         <p class="text-center breadcrumb">Floors: @Model.Floors</p>
         <p class="text-center breadcrumb">Livingrooms: @Model.LivingRooms</p>
         <p class="text-center breadcrumb">Bedrooms: @Model.Bedrooms</p>
+        <p class="text-center breadcrumb">Bathrooms: @Model.Bathrooms</p>
+
+        @Html.ActionLink("Back", "Houses", null, new { @class = "btn btn-info" })
+
+
     </div>
     <div class="col-md-3">
-        <p class="text-center breadcrumb">Bathrooms: @Model.Bathrooms</p>
         <p class="text-center breadcrumb">Park Slots: @Model.ParkSlots</p>
         <p class="text-center breadcrumb">Basemnet: @Model.HaveBasement</p>
         <p class="text-center breadcrumb">Garage: @Model.HaveGarage</p>
         <p class="text-center breadcrumb">Pool: @Model.HavePool</p>
         <p class="text-center breadcrumb">@Model.Price BGN</p>
-        <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+
+        <p class="text-center breadcrumb">Seller email: @Model.SellerName</p>
+        <p class="text-center breadcrumb">Seller phone: @Model.SellerPhone</p>
+
+
+
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
 

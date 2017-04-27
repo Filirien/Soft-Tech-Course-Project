@@ -20,10 +20,10 @@ namespace LandsSystem.Migrations
             // Seed Users
             if (!context.Users.Any())
             {
-                CreateUser(context, "niki@gmail.com", "123", "Nikolay", "Georgiev", 55, "0873462346");
-                CreateUser(context, "denis@gmail.com", "123", "Denis", "Vasilev", 65, "0873462346");
-                CreateUser(context, "marin@gmail.com", "123", "Marin", "Kunovski", 75, "0873462346");
-                CreateUser(context, "pesho.pesho@gmail.com", "123", "Pesho", "Pesho", 20, "0873462346");
+                CreateUser(context, "niki@gmail.com", "123", "Nikolay", "Georgiev", 55, "0876365346");
+                CreateUser(context, "denis@gmail.com", "123", "Denis", "Vasilev", 65, "0873469278");
+                CreateUser(context, "marin@gmail.com", "123", "Marin", "Kunovski", 75, "0873463336");
+                CreateUser(context, "pesho.pesho@gmail.com", "123", "Pesho", "Pesho", 20, "0876428376");
             }
 
             // Seed Roles

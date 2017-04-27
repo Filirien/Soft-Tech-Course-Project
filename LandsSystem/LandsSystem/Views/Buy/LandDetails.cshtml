@@ -10,14 +10,22 @@
     </div>
     <div class="col-md-3">
         <p class="text-center breadcrumb">@Model.Address</p>
+        <p class="text-center breadcrumb">Description: @Model.Description</p>
         <p class="text-center breadcrumb">Land Area: @Model.Area m&#178;</p>
         <p class="text-center breadcrumb">Electricity: @Model.Electricity</p>
+        <p class="text-center breadcrumb">Water: @Model.Water</p>
+
+        @Html.ActionLink("Back", "Lands", null, new { @class = "btn btn-info" })
+
+
     </div>
     <div class="col-md-3">
-        <p class="text-center breadcrumb">Water: @Model.Water</p>
         <p class="text-center breadcrumb">Sewage: @Model.Sewage</p>
         <p class="text-center breadcrumb">@Model.Price BGN</p>
-        <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+        <p class="text-center breadcrumb">Seller email: @Model.SellerName</p>
+        <p class="text-center breadcrumb">Seller phone: @Model.SellerPhone</p>
+
+
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
 
