@@ -30,6 +30,7 @@
 }
 
 <div class="text-center mt-60">
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
     <a href="/Buy/Apartments?page=@(ViewBag.CurrentPage - 1)" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)"><< Previous</a>
     <a href="/Buy/Apartments?page=@(ViewBag.CurrentPage + 1)" class="btn btn-success @(!Model.Any() || Model.Count() < 5 ? "disabled" : string.Empty)">Next >></a>
 </div>
