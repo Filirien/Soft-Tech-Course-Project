@@ -1,12 +1,7 @@
 ﻿using LandsSystem.Data;
-using LandsSystem.Models;
 using LandsSystem.Models.BuyDetailsModel;
-using LandsSystem.Models.HomeBuyModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace LandsSystem.Controllers
@@ -27,19 +22,31 @@ namespace LandsSystem.Controllers
 
             var pageSize = 5;
 
-            var houses = db.Houses
+            var houses = db.HouseAdvertises
                 .OrderByDescending(h => h.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(h => new HouseBuyModel
+                .Select(h => new HouseDetailsModel
                 {
-                    Id = h.Id,
-                    HouseImageUrl = h.ImageUrl,
-                    HouseAddress = h.Address,
-                    HousePrice = h.Price,
-                    HouseYearOfBuilt = h.YearOfBuilt,
-                    LandArea = h.LandArea,
-                    HouseArea = h.HouseArea
+                    HouseAdId = h.Id,
+                    Description = h.Description,
+                    SellerId = h.SellerId,
+                    SellerName = h.Seller.UserName,
+                    HouseId = h.House.Id,
+                    Price=h.House.Price,
+                    YearOfBuilt=h.House.YearOfBuilt,
+                    LandArea=h.House.LandArea,
+                    HouseArea=h.House.HouseArea,
+                    Floors=h.House.Floors,
+                    Bedrooms=h.House.Bedrooms,
+                    LivingRooms=h.House.LivingRooms,
+                    Bathrooms=h.House.Bathrooms,
+                    HaveBasement=h.House.HaveBasement,
+                    HavePool=h.House.HavePool,
+                    HaveGarage=h.House.HaveGarage,
+                    ParkSlots=h.House.ParkSlots,
+                    ImageUrl=h.House.ImageUrl
+
                 })
                 .ToList();
 
@@ -56,19 +63,32 @@ namespace LandsSystem.Controllers
             {
                 var pageSize = 5;
 
-                var apartments = context.Apartments
+                var apartments = context.ApartmentAdvertises
                     .OrderByDescending(a => a.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
-                    .Select(a => new ApartmentBuyModel
+                    .Select(a => new ApartmentDetailsModel
                     {
-                        Id = a.Id,
-                        ApartmentImageUrl = a.ImageUrl,
-                        ApartmentAddress = a.Address,
-                        ApartmentPrice = a.Price,
-                        ApartmentArea = a.ApartmentArea,
-                        TerraceArea = a.TerraceArea,
-                        ApartmentYearOfBuilt = a.YearOfBuilt
+                        ApartmentAdId = a.Id,
+                        Description = a.Description,
+                        SellerId = a.SellerId,
+                        SellerName = a.Seller.UserName,
+                        ApartmentId = a.Apartment.Id,
+                        Address=a.Apartment.Address,
+                        Price=a.Apartment.Price,
+                        YearOfBuilt=a.Apartment.YearOfBuilt,
+                        ApartmentArea=a.Apartment.ApartmentArea,
+                        Floor=a.Apartment.Floor,
+                        Bedrooms=a.Apartment.Bedrooms,
+                        LivingRooms=a.Apartment.LivingRooms,
+                        Bathroom=a.Apartment.Bathroom,
+                        TerraceArea=a.Apartment.TerraceArea,
+                        HaveBasement=a.Apartment.HaveBasement,
+                        HaveElevator=a.Apartment.HaveElevator,
+                        HaveGarage=a.Apartment.HaveGarage,
+                        ParkSlots=a.Apartment.ParkSlots,
+                        ImageUrl=a.Apartment.ImageUrl
+
                     })
                     .ToList();
 
@@ -96,6 +116,7 @@ namespace LandsSystem.Controllers
                         LandAdId = la.Id,
                         Description = la.Description,
                         SellerId = la.SellerId,
+                        SellerName = la.Seller.UserName,
                         LandId = la.Land.Id,
                         ImageUrl = la.Land.ImageUrl,
                         Address = la.Land.Address,
@@ -114,75 +135,26 @@ namespace LandsSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult HouseDetails(int id)
+        public ActionResult HouseDetails(HouseDetailsModel model)
         {
-            var db = new LandsDbContext();
-
-            var house = db.Houses
-                .Where(h => h.Id == id)
-                .Select(h => new HouseDetailsModel
-                {
-
-                    Address = h.Address,
-                    Price = h.Price,
-                    YearOfBuilt = h.YearOfBuilt,
-                    LandArea = h.LandArea,
-                    HouseArea = h.HouseArea,
-                    Floors = h.Floors,
-                    Bedrooms = h.Bedrooms,
-                    LivingRooms = h.LivingRooms,
-                    Bathrooms = h.Bathrooms,
-                    HaveBasement = h.HaveBasement,
-                    HaveGarage = h.HaveGarage,
-                    HavePool = h.HavePool,
-                    ParkSlots = h.ParkSlots,
-                    ImageUrl = h.ImageUrl,
-                    HouseAdvertises = h.HouseAdvertises
-                })
-                .FirstOrDefault();
-
-            if (house == null)
+            if (model == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(house);
+            return View(model);
         }
 
         [Authorize]
-        public ActionResult ApartmentDetails(int id)
+        public ActionResult ApartmentDetails(ApartmentDetailsModel model)
         {
-            var db = new LandsDbContext();
-
-            var apartment = db.Apartments
-                .Where(a => a.Id == id)
-                .Select(a => new ApartmentDetailsModel
-                {
-
-                    Address = a.Address,
-                    Price = a.Price,
-                    YearOfBuilt = a.YearOfBuilt,
-                    ApartmentArea = a.ApartmentArea,
-                    TerraceArea = a.TerraceArea,
-                    Floor = a.Floor,
-                    Bedrooms = a.Bedrooms,
-                    LivingRooms = a.LivingRooms,
-                    Bathroom = a.Bathroom,
-                    HaveBasement = a.HaveBasement,
-                    HaveGarage = a.HaveGarage,
-                    HaveElevator = a.HaveElevator,
-                    ParkSlots = a.ParkSlots,
-                    ImageUrl = a.ImageUrl,
-                    ApartmentAdvertises = a.ApartmentAdvertises
-                })
-                .FirstOrDefault();
-
-            if (apartment == null)
+            
+            if (model == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(apartment);
+            return View(model);
         }
 
         [Authorize]
@@ -238,31 +210,207 @@ namespace LandsSystem.Controllers
         [HttpPost]
         public ActionResult LandEdit(LandDetailsModel model)
         {
+            if (this.ModelState.IsValid)
+            {
+                using (var context = new LandsDbContext())
+                {
+                    var land = context.Lands
+                        .FirstOrDefault(l => l.Id == model.LandId);
+                    if (land == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    land.Address = model.Address;
+                    land.Price = model.Price;
+                    land.Area = model.Area;
+                    land.Electricity = model.Electricity;
+                    land.Water = model.Water;
+                    land.Sewage = model.Sewage;
+                    land.ImageUrl = model.ImageUrl;
+
+                    var landAd = context.LandAdvertises
+                        .FirstOrDefault(la => la.Id == model.LandAdId);
+                    if (landAd == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    landAd.Description = model.Description;
+                    context.SaveChanges();
+                    return RedirectToAction("Lands", "Buy");
+                }
+            }
+            return View(model);
+
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult HouseEdit(int? houseAdId)
+        {
+            if (houseAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             using (var context = new LandsDbContext())
             {
-                var land = context.Lands
-                    .FirstOrDefault(l => l.Id == model.LandId);
-                if (land == null)
+                var h = context.HouseAdvertises.FirstOrDefault(x => x.Id == houseAdId);
+                var model = new HouseDetailsModel()
+                {
+                    HouseAdId = h.Id,
+                    Description = h.Description,
+                    SellerId = h.SellerId,
+                    SellerName = h.Seller.UserName,
+                    HouseId = h.House.Id,
+                    Address = h.House.Address,
+                    Price = h.House.Price,
+                    YearOfBuilt = h.House.YearOfBuilt,
+                    LandArea = h.House.LandArea,
+                    HouseArea = h.House.HouseArea,
+                    Floors = h.House.Floors,
+                    Bedrooms = h.House.Bedrooms,
+                    LivingRooms = h.House.LivingRooms,
+                    Bathrooms = h.House.Bathrooms,
+                    HaveBasement = h.House.HaveBasement,
+                    HavePool = h.House.HavePool,
+                    HaveGarage = h.House.HaveGarage,
+                    ParkSlots = h.House.ParkSlots,
+                    ImageUrl = h.House.ImageUrl
+                };
+                if (model == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                land.Address = model.Address;
-                land.Price = model.Price;
-                land.Area = model.Area;
-                land.Electricity = model.Electricity;
-                land.Water = model.Water;
-                land.Sewage = model.Sewage;
-                land.ImageUrl = model.ImageUrl;
 
-                var landAd = context.LandAdvertises
-                    .FirstOrDefault(la => la.Id == model.LandAdId);
-                if (landAd == null)
+                return View(model);
+            }
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult HouseEdit(HouseDetailsModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                using (var context = new LandsDbContext())
+                {
+                    var house = context.Houses.FirstOrDefault(h => h.Id == model.HouseId);
+                    if (house == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    house.Address = model.Address;
+                    house.Price = model.Price;
+                    house.YearOfBuilt = model.YearOfBuilt;
+                    house.LandArea = model.LandArea;
+                    house.HouseArea = model.HouseArea;
+                    house.Floors = model.Floors;
+                    house.Bedrooms = model.Bedrooms;
+                    house.LivingRooms = model.LivingRooms;
+                    house.Bathrooms = model.Bathrooms;
+                    house.HaveBasement = model.HaveBasement;
+                    house.HavePool = model.HavePool;
+                    house.HaveGarage = model.HaveGarage;
+                    house.ParkSlots = model.ParkSlots;
+                    house.ImageUrl = model.ImageUrl;
+
+                    var houseAd = context.HouseAdvertises
+                        .FirstOrDefault(ha => ha.Id == model.HouseAdId);
+                    if (houseAd == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    houseAd.Description = model.Description;
+                    context.SaveChanges();
+                    return RedirectToAction("Houses", "Buy");
+                }
+            }
+            return View(model);
+
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult ApartmentEdit(int? apartmentAdId)
+        {
+            if (apartmentAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var context = new LandsDbContext())
+            {
+                var a = context.ApartmentAdvertises.FirstOrDefault(x => x.Id == apartmentAdId);
+                var model = new ApartmentDetailsModel()
+                {
+                    ApartmentAdId = a.Id,
+                    Description = a.Description,
+                    SellerId = a.SellerId,
+                    SellerName = a.Seller.UserName,
+                    ApartmentId = a.Apartment.Id,
+                    Address = a.Apartment.Address,
+                    Price = a.Apartment.Price,
+                    YearOfBuilt = a.Apartment.YearOfBuilt,
+                    ApartmentArea = a.Apartment.ApartmentArea,
+                    Floor = a.Apartment.Floor,
+                    Bedrooms = a.Apartment.Bedrooms,
+                    LivingRooms = a.Apartment.LivingRooms,
+                    Bathroom = a.Apartment.Bathroom,
+                    TerraceArea = a.Apartment.TerraceArea,
+                    HaveBasement = a.Apartment.HaveBasement,
+                    HaveElevator = a.Apartment.HaveElevator,
+                    HaveGarage = a.Apartment.HaveGarage,
+                    ParkSlots = a.Apartment.ParkSlots,
+                    ImageUrl = a.Apartment.ImageUrl
+                };
+                if (model == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                landAd.Description = model.Description;
-                context.SaveChanges();
-                return RedirectToAction("Lands", "Buy");
+
+                return View(model);
+            }
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ApartmentEdit(ApartmentDetailsModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                using (var context = new LandsDbContext())
+                {
+                    var apartment = context.Apartments.FirstOrDefault(a => a.Id == model.ApartmentId);
+                    if (apartment == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    apartment.Address = model.Address;
+                    apartment.Price = model.Price;
+                    apartment.YearOfBuilt = model.YearOfBuilt;
+                    apartment.ApartmentArea = model.ApartmentArea;
+                    apartment.Floor = model.Floor;
+                    apartment.Bedrooms = model.Bedrooms;
+                    apartment.LivingRooms = model.LivingRooms;
+                    apartment.Bathroom = model.Bathroom;
+                    apartment.TerraceArea = model.TerraceArea;
+                    apartment.HaveBasement = model.HaveBasement;
+                    apartment.HaveElevator = model.HaveElevator;
+                    apartment.HaveGarage = model.HaveGarage;
+                    apartment.ParkSlots = model.ParkSlots;
+                    apartment.ImageUrl = model.ImageUrl;
+
+                    var apartmentAd = context.ApartmentAdvertises
+                        .FirstOrDefault(aa => aa.Id == model.ApartmentAdId);
+                    if (apartmentAd == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    apartmentAd.Description = model.Description;
+                    context.SaveChanges();
+                    return RedirectToAction("Apartments", "Buy");
+                }
             }
             return View(model);
 

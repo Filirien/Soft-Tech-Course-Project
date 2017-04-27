@@ -23,5 +23,11 @@
         <p class="text-center breadcrumb">Garage: @Model.HaveGarage</p>
         <p class="text-center breadcrumb">Park Slots: @Model.ParkSlots</p>
         <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+        @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
+        {
+
+            <p class="text-right"><a href="@Url.Action("ApartmentEdit", "Buy", new { @apartmentAdId = Model.ApartmentAdId})" class="btn btn-success">Edit</a></p>
+            <p class="text-right"><a href="#" class="btn btn-danger">Delete</a></p>
+        }
     </div>
 </div>

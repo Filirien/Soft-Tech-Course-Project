@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LandsSystem.Models.HomeBuyModel.ApartmentBuyModel>
+﻿@model List<LandsSystem.Models.BuyDetailsModel.ApartmentDetailsModel>
 
 @{
     ViewBag.Title = "Apartments";
@@ -16,15 +16,15 @@
 {
     <div class="row">
         <div class="col-sm-6 mt-60">
-            <img src="@apartment.ApartmentImageUrl" class="img-responsive" />
+            <img src="@apartment.ImageUrl" class="img-responsive" />
         </div>
         <div class="col-sm-6 mt-60">
-            <p class="text-left breadcrumb">@apartment.ApartmentAddress (@apartment.ApartmentYearOfBuilt г.)</p>
+            <p class="text-left breadcrumb">@apartment.Address (@apartment.YearOfBuilt г.)</p>
             <p class="text-left breadcrumb">Apartment Area: @apartment.ApartmentArea m&#178;</p>
             <p class="text-left breadcrumb">Terrace Area: @apartment.TerraceArea m&#178;</p>
-            <p class="text-left breadcrumb">@apartment.ApartmentPrice BGN</p>
+            <p class="text-left breadcrumb">@apartment.Price BGN</p>
             <br />
-            <a href="/Buy/ApartmentDetails/@apartment.Id" class="btn btn-success">More Info &raquo;</a>
+            <a href="@Url.Action("ApartmentDetails", "Buy", apartment)" class="btn btn-success">More Info &raquo;</a>
         </div>
     </div>
 }

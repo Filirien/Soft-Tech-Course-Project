@@ -9,7 +9,9 @@ namespace LandsSystem.Models.BuyDetailsModel
 
         public int HouseAdId { get; set; }
 
-        public int SellerId { get; set; }
+        public string SellerId { get; set; }
+
+        public string SellerName { get; set; }
 
         public string Description { get; set; }
 
