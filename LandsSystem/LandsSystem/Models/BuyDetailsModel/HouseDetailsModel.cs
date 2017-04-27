@@ -5,7 +5,13 @@ namespace LandsSystem.Models.BuyDetailsModel
 {
     public class HouseDetailsModel
     {
-        public int Id { get; set; }
+        public int HouseId { get; set; }
+
+        public int HouseAdId { get; set; }
+
+        public int SellerId { get; set; }
+
+        public string Description { get; set; }
 
         public string Address { get; set; }
 

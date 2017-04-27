@@ -5,6 +5,7 @@ using LandsSystem.Models.HomeBuyModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -40,53 +41,64 @@ namespace LandsSystem.Controllers
 
         public ActionResult Apartments()
         {
-            var db = new LandsDbContext();
+            using (var context = new LandsDbContext())
+            {
 
-            var apartments = db.Apartments
-                .OrderByDescending(a => a.Id)
-                .Select(a => new ApartmentBuyModel
-                {
-                    Id = a.Id,
-                    ApartmentImageUrl = a.ImageUrl,
-                    ApartmentAddress = a.Address,
-                    ApartmentPrice = a.Price,
-                    ApartmentArea = a.ApartmentArea,
-                    TerraceArea = a.TerraceArea,
-                    ApartmentYearOfBuilt = a.YearOfBuilt
-                })
-                .ToList();
+                var apartments = context.Apartments
+                    .Select(a => new ApartmentBuyModel
+                    {
+                        Id = a.Id,
+                        ApartmentImageUrl = a.ImageUrl,
+                        ApartmentAddress = a.Address,
+                        ApartmentPrice = a.Price,
+                        ApartmentArea = a.ApartmentArea,
+                        TerraceArea = a.TerraceArea,
+                        ApartmentYearOfBuilt = a.YearOfBuilt
+                    })
+                    .OrderByDescending(a => a.Id)
+                    .ToList();
 
-            return View(apartments);
+                return View(apartments);
+            }
         }
 
         public ActionResult Lands()
         {
-            var db = new LandsDbContext();
+            using (var context = new LandsDbContext())
+            {
 
-            var lands = db.Lands
-                .OrderByDescending(a => a.Id)
-                .Select(l => new LandBuyModel
-                {
-                    Id = l.Id,
-                    LandImageUrl = l.ImageUrl,
-                    LandAddress = l.Address,
-                    LandPrice = l.Price,
-                    Area = l.Area
-                })
-                .ToList();
+                var lands = context.LandAdvertises
+                    .Select(la => new LandDetailsModel
+                    {
+                        LandAdId = la.Id,
+                        Description = la.Description,
+                        SellerId = la.SellerId,
+                        LandId = la.Land.Id,
+                        ImageUrl = la.Land.ImageUrl,
+                        Address = la.Land.Address,
+                        Price = la.Land.Price,
+                        Area = la.Land.Area,
+                        Electricity = la.Land.Electricity,
+                        Water = la.Land.Water,
+                        Sewage = la.Land.Sewage
+                    })
+                    .OrderByDescending(a => a.LandId)
+                    .ToList();
 
-            return View(lands);
+
+                return View(lands);
+            }
         }
 
         public ActionResult HouseDetails(int id)
         {
             var db = new LandsDbContext();
-            
+
             var house = db.Houses
                 .Where(h => h.Id == id)
                 .Select(h => new HouseDetailsModel
                 {
-                    Id = h.Id,
+
                     Address = h.Address,
                     Price = h.Price,
                     YearOfBuilt = h.YearOfBuilt,
@@ -121,7 +133,7 @@ namespace LandsSystem.Controllers
                 .Where(a => a.Id == id)
                 .Select(a => new ApartmentDetailsModel
                 {
-                    Id = a.Id,
+
                     Address = a.Address,
                     Price = a.Price,
                     YearOfBuilt = a.YearOfBuilt,
@@ -148,32 +160,87 @@ namespace LandsSystem.Controllers
             return View(apartment);
         }
 
-        public ActionResult LandDetails(int id)
+        public ActionResult LandDetails(LandDetailsModel model)
         {
-            var db = new LandsDbContext();
 
-            var land = db.Lands
-                .Where(l => l.Id == id)
-                .Select(l => new LandDetailsModel
-                {
-                    Id = l.Id,
-                    Address = l.Address,
-                    Price = l.Price,
-                    Area = l.Area,
-                    Electricity = l.Electricity,
-                    Water = l.Water,
-                    Sewage = l.Sewage,
-                    ImageUrl = l.ImageUrl,
-                    LandAdvertises = l.LandAdvertises
-                })
-                .FirstOrDefault();
-            
-            if (land == null)
+            if (model == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(land);
+
+            return View(model);
+
         }
+        [Authorize]
+        [HttpGet]
+        public ActionResult LandEdit(int? landAdId)
+        {
+            if (landAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var context = new LandsDbContext())
+            {
+                var la = context.LandAdvertises
+                                    .FirstOrDefault(x => x.Id == landAdId);
+                var model = new LandDetailsModel()
+                {
+                    LandAdId = la.Id,
+                    Description = la.Description,
+                    SellerId = la.SellerId,
+                    LandId = la.Land.Id,
+                    ImageUrl = la.Land.ImageUrl,
+                    Address = la.Land.Address,
+                    Price = la.Land.Price,
+                    Area = la.Land.Area,
+                    Electricity = la.Land.Electricity,
+                    Water = la.Land.Water,
+                    Sewage = la.Land.Sewage
+                };
+                if (model == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                return View(model);
+            }
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult LandEdit(LandDetailsModel model)
+        {
+            using (var context = new LandsDbContext())
+            {
+                var land = context.Lands
+                    .FirstOrDefault(l => l.Id == model.LandId);
+                if (land == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                land.Address = model.Address;
+                land.Price = model.Price;
+                land.Area = model.Area;
+                land.Electricity = model.Electricity;
+                land.Water = model.Water;
+                land.Sewage = model.Sewage;
+                land.ImageUrl = model.ImageUrl;
+
+                var landAd = context.LandAdvertises
+                    .FirstOrDefault(la => la.Id == model.LandAdId);
+                if (landAd == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                landAd.Description = model.Description;
+                context.SaveChanges();
+                return RedirectToAction("Lands", "Buy");
+            }
+            return View(model);
+
+        }
+
     }
 }

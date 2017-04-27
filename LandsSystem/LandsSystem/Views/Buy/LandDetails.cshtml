@@ -18,5 +18,11 @@
         <p class="text-center breadcrumb">Sewage: @Model.Sewage</p>
         <p class="text-center breadcrumb">@Model.Price BGN</p>
         <p class="text-right"><a href="#" class="btn btn-success">Buy</a></p>
+        @if (User.IsInRole("Administrator"))
+        {
+
+            <p class="text-right"><a href="@Url.Action("LandEdit", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-success">Edit</a></p>
+            <p class="text-right"><a href="#" class="btn btn-danger">Delete</a></p>
+        }
     </div>
 </div>

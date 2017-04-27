@@ -5,7 +5,13 @@ namespace LandsSystem.Models.BuyDetailsModel
 {
     public class LandDetailsModel
     {
-        public int Id { get; set; }
+        public int LandId { get; set; }
+
+        public int LandAdId { get; set; }
+
+        public string SellerId { get; set; }
+
+        public string Description { get; set; }
 
         public string Address { get; set; }
 
@@ -20,7 +26,5 @@ namespace LandsSystem.Models.BuyDetailsModel
         public bool Sewage { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public virtual List<LandAdvertise> LandAdvertises { get; set; } = new List<LandAdvertise>();
     }
 }
