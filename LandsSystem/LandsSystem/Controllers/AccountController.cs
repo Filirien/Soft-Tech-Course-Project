@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LandsSystem.Models;
 using LandsSystem.Data;
+using System;
 
 namespace LandsSystem.Controllers
 {
@@ -149,7 +150,13 @@ namespace LandsSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.LastName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    RegisteredOn = DateTime.Now};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

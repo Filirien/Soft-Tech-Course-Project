@@ -20,8 +20,11 @@ namespace LandsSystem.Data
         [DataType(DataType.DateTime)]
         public DateTime RegisteredOn { get; set; }
 
-        [Range(0, 120)]
+        [Required]
+        [Range(18, 120)]
         public int Age { get; set; }
+        
+        public string PhoneNumber { get; set; }
 
 
         public virtual List<HouseAdvertise> PostedHouseAds { get; set; } = new List<HouseAdvertise>();

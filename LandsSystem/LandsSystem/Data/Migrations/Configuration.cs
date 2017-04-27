@@ -7,7 +7,7 @@ namespace LandsSystem.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LandsSystem.Data.LandsDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LandsDbContext>
     {
         public Configuration()
         {
@@ -15,15 +15,15 @@ namespace LandsSystem.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(LandsSystem.Data.LandsDbContext context)
+        protected override void Seed(LandsDbContext context)
         {
             // Seed Users
             if (!context.Users.Any())
             {
-                CreateUser(context, "niki@gmail.com", "123", "Nikolay", "Georgiev", 55);
-                CreateUser(context, "denis@gmail.com", "123", "Denis", "Vasilev", 65);
-                CreateUser(context, "marin@gmail.com", "123", "Marin", "Kunovski", 75);
-                CreateUser(context, "pesho.pesho@gmail.com", "123", "Pesho", "Pesho", 8);
+                CreateUser(context, "niki@gmail.com", "123", "Nikolay", "Georgiev", 55, "0873462346");
+                CreateUser(context, "denis@gmail.com", "123", "Denis", "Vasilev", 65, "0873462346");
+                CreateUser(context, "marin@gmail.com", "123", "Marin", "Kunovski", 75, "0873462346");
+                CreateUser(context, "pesho.pesho@gmail.com", "123", "Pesho", "Pesho", 20, "0873462346");
             }
 
             // Seed Roles
@@ -237,7 +237,7 @@ namespace LandsSystem.Migrations
             context.SaveChanges();
         }
 
-        private void CreateUser(LandsDbContext context, string email, string password, string firstName, string lastName, int age)
+        private void CreateUser(LandsDbContext context, string email, string password, string firstName, string lastName, int age, string phoneNumber)
         {
             var userManager = new UserManager<User>(
                 new UserStore<User>(context));
@@ -259,6 +259,7 @@ namespace LandsSystem.Migrations
                 FirstName = firstName,
                 LastName = lastName,
                 Age = age,
+                PhoneNumber = phoneNumber,
                 RegisteredOn = DateTime.Now.AddDays(rnd.Next(0, 300))
             };
 
