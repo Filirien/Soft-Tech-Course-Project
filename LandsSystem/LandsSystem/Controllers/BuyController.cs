@@ -33,19 +33,19 @@ namespace LandsSystem.Controllers
                     SellerId = h.SellerId,
                     SellerName = h.Seller.UserName,
                     HouseId = h.House.Id,
-                    Price=h.House.Price,
-                    YearOfBuilt=h.House.YearOfBuilt,
-                    LandArea=h.House.LandArea,
-                    HouseArea=h.House.HouseArea,
-                    Floors=h.House.Floors,
-                    Bedrooms=h.House.Bedrooms,
-                    LivingRooms=h.House.LivingRooms,
-                    Bathrooms=h.House.Bathrooms,
-                    HaveBasement=h.House.HaveBasement,
-                    HavePool=h.House.HavePool,
-                    HaveGarage=h.House.HaveGarage,
-                    ParkSlots=h.House.ParkSlots,
-                    ImageUrl=h.House.ImageUrl
+                    Price = h.House.Price,
+                    YearOfBuilt = h.House.YearOfBuilt,
+                    LandArea = h.House.LandArea,
+                    HouseArea = h.House.HouseArea,
+                    Floors = h.House.Floors,
+                    Bedrooms = h.House.Bedrooms,
+                    LivingRooms = h.House.LivingRooms,
+                    Bathrooms = h.House.Bathrooms,
+                    HaveBasement = h.House.HaveBasement,
+                    HavePool = h.House.HavePool,
+                    HaveGarage = h.House.HaveGarage,
+                    ParkSlots = h.House.ParkSlots,
+                    ImageUrl = h.House.ImageUrl
 
                 })
                 .ToList();
@@ -74,20 +74,20 @@ namespace LandsSystem.Controllers
                         SellerId = a.SellerId,
                         SellerName = a.Seller.UserName,
                         ApartmentId = a.Apartment.Id,
-                        Address=a.Apartment.Address,
-                        Price=a.Apartment.Price,
-                        YearOfBuilt=a.Apartment.YearOfBuilt,
-                        ApartmentArea=a.Apartment.ApartmentArea,
-                        Floor=a.Apartment.Floor,
-                        Bedrooms=a.Apartment.Bedrooms,
-                        LivingRooms=a.Apartment.LivingRooms,
-                        Bathroom=a.Apartment.Bathroom,
-                        TerraceArea=a.Apartment.TerraceArea,
-                        HaveBasement=a.Apartment.HaveBasement,
-                        HaveElevator=a.Apartment.HaveElevator,
-                        HaveGarage=a.Apartment.HaveGarage,
-                        ParkSlots=a.Apartment.ParkSlots,
-                        ImageUrl=a.Apartment.ImageUrl
+                        Address = a.Apartment.Address,
+                        Price = a.Apartment.Price,
+                        YearOfBuilt = a.Apartment.YearOfBuilt,
+                        ApartmentArea = a.Apartment.ApartmentArea,
+                        Floor = a.Apartment.Floor,
+                        Bedrooms = a.Apartment.Bedrooms,
+                        LivingRooms = a.Apartment.LivingRooms,
+                        Bathroom = a.Apartment.Bathroom,
+                        TerraceArea = a.Apartment.TerraceArea,
+                        HaveBasement = a.Apartment.HaveBasement,
+                        HaveElevator = a.Apartment.HaveElevator,
+                        HaveGarage = a.Apartment.HaveGarage,
+                        ParkSlots = a.Apartment.ParkSlots,
+                        ImageUrl = a.Apartment.ImageUrl
 
                     })
                     .ToList();
@@ -148,7 +148,7 @@ namespace LandsSystem.Controllers
         [Authorize]
         public ActionResult ApartmentDetails(ApartmentDetailsModel model)
         {
-            
+
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -413,8 +413,65 @@ namespace LandsSystem.Controllers
                 }
             }
             return View(model);
-
         }
 
+        [Authorize]
+        public ActionResult LandDelete(int? landAdId)
+        {
+            if (landAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var context = new LandsDbContext())
+            {
+                var landAd = context.LandAdvertises.FirstOrDefault(la => la.Id == landAdId);
+                var land = context.Lands.FirstOrDefault(l => l.Id == landAd.LandId);
+
+                context.Lands.Remove(land);
+                context.LandAdvertises.Remove(landAd);
+                context.SaveChanges();
+            }
+            return RedirectToAction("Lands", "Buy");
+        }
+
+
+        [Authorize]
+        public ActionResult ApartmentDelete(int? apartmentAdId)
+        {
+            if (apartmentAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var context = new LandsDbContext())
+            {
+                var apartmentAd = context.ApartmentAdvertises.FirstOrDefault(aa => aa.Id == apartmentAdId);
+                var apartment = context.Apartments.FirstOrDefault(a => a.Id == apartmentAd.ApartmentId);
+
+                context.Apartments.Remove(apartment);
+                context.ApartmentAdvertises.Remove(apartmentAd);
+                context.SaveChanges();
+            }
+            return RedirectToAction("Apartments", "Buy");
+        }
+
+
+        [Authorize]
+        public ActionResult HouseDelete(int? houseAdId)
+        {
+            if (houseAdId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var context = new LandsDbContext())
+            {
+                var houseAd = context.HouseAdvertises.FirstOrDefault(ha => ha.Id == houseAdId);
+                var house = context.Houses.FirstOrDefault(h=> h.Id == houseAd.HouseId);
+
+                context.Houses.Remove(house);
+                context.HouseAdvertises.Remove(houseAd);
+                context.SaveChanges();
+            }
+            return RedirectToAction("Houses", "Buy");
+        }
     }
 }

@@ -22,7 +22,7 @@
         {
 
             <p class="text-right"><a href="@Url.Action("LandEdit", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-success">Edit</a></p>
-            <p class="text-right"><a href="#" class="btn btn-danger">Delete</a></p>
+            <p class="text-right"><a href="@Url.Action("LandDelete", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-danger">Delete</a></p>
         }
     </div>
 </div>
