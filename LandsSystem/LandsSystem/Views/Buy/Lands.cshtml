@@ -11,6 +11,13 @@
     <h2 class="text-center">No more lands!</h2>
 }
 
+@using (Html.BeginForm("Lands", "Buy", FormMethod.Get))
+{
+    <div class="text-center">
+        <input type="text" class="form-control" name="search" style="display:inline-block" value="@Request.QueryString["search"]" />
+        <input type="submit" value="Search" class="btn btn-success" />
+    </div>
+}
 
 @foreach (var land in Model)
 {
@@ -19,9 +26,12 @@
             <img src="@land.ImageUrl" class="img-responsive" />
         </div>
         <div class="col-sm-6 mt-60">
-            <p class="text-left breadcrumb">@land.Address</p>
+            <h3 class="text-left breadcrumb">@land.Address</h3>
+            <h4 class="text-left breadcrumb">@land.Description</h4>
             <p class="text-left breadcrumb">Land Area: @land.Area m&#178;</p>
             <p class="text-left breadcrumb">@land.Price BGN</p>
+            <h6 class="text-right">Posted on: @land.CreationDate</h6>
+            <h6 class="text-right">Buy @land.FullName</h6>
             <br />
             <a href="@Url.Action("LandDetails", "Buy", land)" class="btn btn-success">More Info &raquo;</a>
         </div>

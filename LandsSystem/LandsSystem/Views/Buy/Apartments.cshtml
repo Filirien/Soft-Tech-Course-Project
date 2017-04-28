@@ -11,6 +11,13 @@
     <h2 class="text-center">No more apartments!</h2>
 }
 
+@using (Html.BeginForm("Apartments", "Buy", FormMethod.Get))
+{
+    <div class="text-center">
+        <input type="text" class="form-control" name="search" style="display:inline-block" value="@Request.QueryString["search"]" />
+        <input type="submit" value="Search" class="btn btn-success" />
+    </div>
+}
 
 @foreach (var apartment in Model)
 {
@@ -19,10 +26,13 @@
             <img src="@apartment.ImageUrl" class="img-responsive" />
         </div>
         <div class="col-sm-6 mt-60">
-            <p class="text-left breadcrumb">@apartment.Address (@apartment.YearOfBuilt г.)</p>
+            <h3 class="text-left breadcrumb">@apartment.Address (@apartment.YearOfBuilt)</h3>
+            <h4 class="text-left breadcrumb">@apartment.Description</h4>
             <p class="text-left breadcrumb">Apartment Area: @apartment.ApartmentArea m&#178;</p>
             <p class="text-left breadcrumb">Terrace Area: @apartment.TerraceArea m&#178;</p>
             <p class="text-left breadcrumb">@apartment.Price BGN</p>
+            <h6 class="text-right">Posted on: @apartment.CreationDate</h6>
+            <h6 class="text-right">By: @apartment.FullName</h6>
             <br />
             <a href="@Url.Action("ApartmentDetails", "Buy", apartment)" class="btn btn-success">More Info &raquo;</a>
         </div>

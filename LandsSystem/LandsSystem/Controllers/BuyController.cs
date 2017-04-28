@@ -16,55 +16,75 @@ namespace LandsSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult Houses(int page = 1, string user = null)
+        public ActionResult Houses(int page = 1, string user = null, string search = null)
         {
-            var db = new LandsDbContext();
-
-            var pageSize = 5;
-
-            var houses = db.HouseAdvertises
-                .OrderByDescending(h => h.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(h => new HouseDetailsModel
-                {
-                    HouseAdId = h.Id,
-                    Description = h.Description,
-                    SellerId = h.SellerId,
-                    SellerName = h.Seller.UserName,
-                    SellerPhone=h.Seller.PhoneNumber,
-                    HouseId = h.House.Id,
-                    Price = h.House.Price,
-                    YearOfBuilt = h.House.YearOfBuilt,
-                    LandArea = h.House.LandArea,
-                    HouseArea = h.House.HouseArea,
-                    Floors = h.House.Floors,
-                    Bedrooms = h.House.Bedrooms,
-                    LivingRooms = h.House.LivingRooms,
-                    Bathrooms = h.House.Bathrooms,
-                    HaveBasement = h.House.HaveBasement,
-                    HavePool = h.House.HavePool,
-                    HaveGarage = h.House.HaveGarage,
-                    ParkSlots = h.House.ParkSlots,
-                    ImageUrl = h.House.ImageUrl
-
-                })
-                .ToList();
-
-            ViewBag.CurrentPage = page;
-
-            return View(houses);
-        }
-
-        [Authorize]
-        public ActionResult Apartments(int page = 1, string user = null)
-        {
-
             using (var context = new LandsDbContext())
             {
                 var pageSize = 5;
 
-                var apartments = context.ApartmentAdvertises
+                var housesQuery = context.HouseAdvertises.AsQueryable();
+
+                if (search != null)
+                {
+                    housesQuery = housesQuery
+                        .Where(h => h.House.Address.ToLower().Contains(search.ToLower()) ||
+                            h.Seller.FirstName.ToLower().Contains(search.ToLower()));
+                }
+
+                var houses = housesQuery
+                    .OrderByDescending(h => h.Id)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(h => new HouseDetailsModel
+                    {
+                        HouseAdId = h.Id,
+                        Description = h.Description,
+                        Address = h.House.Address,
+                        SellerId = h.SellerId,
+                        FullName = h.Seller.FirstName + " " + h.Seller.LastName,
+                        SellerName = h.Seller.UserName,
+                        SellerPhone = h.Seller.PhoneNumber,
+                        HouseId = h.House.Id,
+                        Price = h.House.Price,
+                        YearOfBuilt = h.House.YearOfBuilt,
+                        LandArea = h.House.LandArea,
+                        HouseArea = h.House.HouseArea,
+                        Floors = h.House.Floors,
+                        Bedrooms = h.House.Bedrooms,
+                        LivingRooms = h.House.LivingRooms,
+                        Bathrooms = h.House.Bathrooms,
+                        HaveBasement = h.House.HaveBasement,
+                        HavePool = h.House.HavePool,
+                        HaveGarage = h.House.HaveGarage,
+                        ParkSlots = h.House.ParkSlots,
+                        CreationDate = h.CreationDate,
+                        ImageUrl = h.House.ImageUrl
+                    })
+                    .ToList();
+
+                ViewBag.CurrentPage = page;
+
+                return View(houses);
+            }
+        }
+
+        [Authorize]
+        public ActionResult Apartments(int page = 1, string user = null, string search = null)
+        {
+            using (var context = new LandsDbContext())
+            {
+                var pageSize = 5;
+
+                var apartmentsQuery = context.ApartmentAdvertises.AsQueryable();
+
+                if (search != null)
+                {
+                    apartmentsQuery = apartmentsQuery
+                        .Where(a => a.Apartment.Address.ToLower().Contains(search.ToLower()) ||
+                            a.Seller.FirstName.ToLower().Contains(search.ToLower()));
+                }
+
+                var apartments = apartmentsQuery
                     .OrderByDescending(a => a.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -73,6 +93,7 @@ namespace LandsSystem.Controllers
                         ApartmentAdId = a.Id,
                         Description = a.Description,
                         SellerId = a.SellerId,
+                        FullName = a.Seller.FirstName + " " + a.Seller.LastName,
                         SellerName = a.Seller.UserName,
                         SellerPhone=a.Seller.PhoneNumber,
                         ApartmentId = a.Apartment.Id,
@@ -89,8 +110,8 @@ namespace LandsSystem.Controllers
                         HaveElevator = a.Apartment.HaveElevator,
                         HaveGarage = a.Apartment.HaveGarage,
                         ParkSlots = a.Apartment.ParkSlots,
+                        CreationDate = a.CreationDate,
                         ImageUrl = a.Apartment.ImageUrl
-
                     })
                     .ToList();
 
@@ -101,15 +122,22 @@ namespace LandsSystem.Controllers
         }
 
         [Authorize]
-        public ActionResult Lands(int page = 1, string user = null)
+        public ActionResult Lands(int page = 1, string user = null, string search = null)
         {
-
             using (var context = new LandsDbContext())
             {
-
                 var pageSize = 5;
 
-                var lands = context.LandAdvertises
+                var landsQuery = context.LandAdvertises.AsQueryable();
+
+                if (search != null)
+                {
+                    landsQuery = landsQuery
+                        .Where(l => l.Land.Address.ToLower().Contains(search.ToLower()) ||
+                            l.Seller.FirstName.ToLower().Contains(search.ToLower()));
+                }
+
+                var lands = landsQuery
                     .OrderByDescending(a => a.Id)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -118,6 +146,7 @@ namespace LandsSystem.Controllers
                         LandAdId = la.Id,
                         Description = la.Description,
                         SellerId = la.SellerId,
+                        FullName = la.Seller.FirstName + " " + la.Seller.LastName,
                         SellerName = la.Seller.UserName,
                         SellerPhone=la.Seller.PhoneNumber,
                         LandId = la.Land.Id,
@@ -127,7 +156,8 @@ namespace LandsSystem.Controllers
                         Area = la.Land.Area,
                         Electricity = la.Land.Electricity,
                         Water = la.Land.Water,
-                        Sewage = la.Land.Sewage
+                        Sewage = la.Land.Sewage,
+                        CreationDate = la.CreationDate
                     })
                     .ToList();
 
@@ -151,7 +181,6 @@ namespace LandsSystem.Controllers
         [Authorize]
         public ActionResult ApartmentDetails(ApartmentDetailsModel model)
         {
-
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -163,16 +192,14 @@ namespace LandsSystem.Controllers
         [Authorize]
         public ActionResult LandDetails(LandDetailsModel model)
         {
-
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
             return View(model);
-
         }
+
         [Authorize]
         [HttpGet]
         public ActionResult LandEdit(int? landAdId)
@@ -181,6 +208,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var la = context.LandAdvertises
@@ -199,6 +227,7 @@ namespace LandsSystem.Controllers
                     Water = la.Land.Water,
                     Sewage = la.Land.Sewage
                 };
+
                 if (model == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -206,7 +235,6 @@ namespace LandsSystem.Controllers
 
                 return View(model);
             }
-
         }
 
         [Authorize]
@@ -223,6 +251,7 @@ namespace LandsSystem.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+
                     land.Address = model.Address;
                     land.Price = model.Price;
                     land.Area = model.Area;
@@ -237,15 +266,17 @@ namespace LandsSystem.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+
                     landAd.Description = model.Description;
                     context.SaveChanges();
+
                     return RedirectToAction("Lands", "Buy");
                 }
             }
+
             return View(model);
 
         }
-
 
         [Authorize]
         [HttpGet]
@@ -255,6 +286,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var h = context.HouseAdvertises.FirstOrDefault(x => x.Id == houseAdId);
@@ -287,7 +319,6 @@ namespace LandsSystem.Controllers
 
                 return View(model);
             }
-
         }
 
         [Authorize]
@@ -324,13 +355,15 @@ namespace LandsSystem.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+
                     houseAd.Description = model.Description;
                     context.SaveChanges();
+
                     return RedirectToAction("Houses", "Buy");
                 }
             }
-            return View(model);
 
+            return View(model);
         }
 
         [Authorize]
@@ -341,6 +374,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var a = context.ApartmentAdvertises.FirstOrDefault(x => x.Id == apartmentAdId);
@@ -373,7 +407,6 @@ namespace LandsSystem.Controllers
 
                 return View(model);
             }
-
         }
 
         [Authorize]
@@ -410,11 +443,14 @@ namespace LandsSystem.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+
                     apartmentAd.Description = model.Description;
                     context.SaveChanges();
+
                     return RedirectToAction("Apartments", "Buy");
                 }
             }
+
             return View(model);
         }
 
@@ -425,6 +461,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var landAd = context.LandAdvertises.FirstOrDefault(la => la.Id == landAdId);
@@ -434,6 +471,7 @@ namespace LandsSystem.Controllers
                 context.LandAdvertises.Remove(landAd);
                 context.SaveChanges();
             }
+
             return RedirectToAction("Lands", "Buy");
         }
 
@@ -445,6 +483,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var apartmentAd = context.ApartmentAdvertises.FirstOrDefault(aa => aa.Id == apartmentAdId);
@@ -454,6 +493,7 @@ namespace LandsSystem.Controllers
                 context.ApartmentAdvertises.Remove(apartmentAd);
                 context.SaveChanges();
             }
+
             return RedirectToAction("Apartments", "Buy");
         }
 
@@ -465,6 +505,7 @@ namespace LandsSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var context = new LandsDbContext())
             {
                 var houseAd = context.HouseAdvertises.FirstOrDefault(ha => ha.Id == houseAdId);
@@ -474,6 +515,7 @@ namespace LandsSystem.Controllers
                 context.HouseAdvertises.Remove(houseAd);
                 context.SaveChanges();
             }
+
             return RedirectToAction("Houses", "Buy");
         }
     }

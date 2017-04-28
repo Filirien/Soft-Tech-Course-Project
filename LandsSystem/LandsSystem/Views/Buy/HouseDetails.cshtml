@@ -5,11 +5,12 @@
 }
 
 <div class="row mt-60">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <img src="@Model.ImageUrl" class="img-responsive" />
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <p class="text-center breadcrumb">@Model.Address (@Model.YearOfBuilt)</p>
+        <p class="text-center breadcrumb">@Model.Description</p>
         <p class="text-center breadcrumb">Land Area: @Model.LandArea m&#178;</p>
         <p class="text-center breadcrumb">House Area: @Model.HouseArea m&#178;</p>
         <p class="text-center breadcrumb">Floors: @Model.Floors</p>
@@ -18,24 +19,22 @@
         <p class="text-center breadcrumb">Bathrooms: @Model.Bathrooms</p>
 
         @Html.ActionLink("Back", "Houses", null, new { @class = "btn btn-info" })
-
-
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <p class="text-center breadcrumb">Park Slots: @Model.ParkSlots</p>
-        <p class="text-center breadcrumb">Basemnet: @Model.HaveBasement</p>
-        <p class="text-center breadcrumb">Garage: @Model.HaveGarage</p>
-        <p class="text-center breadcrumb">Pool: @Model.HavePool</p>
+        <p class="text-center breadcrumb">Basemnet: @(Model.HaveBasement ? "Yes" : "No")</p>
+        <p class="text-center breadcrumb">Garage: @(Model.HaveGarage ? "Yes" : "No")</p>
+        <p class="text-center breadcrumb">Pool: @(Model.HavePool ? "Yes" : "No")</p>
         <p class="text-center breadcrumb">@Model.Price BGN</p>
 
         <p class="text-center breadcrumb">Seller email: @Model.SellerName</p>
         <p class="text-center breadcrumb">Seller phone: @Model.SellerPhone</p>
 
-
+        <h6 class="text-right">Posted on: @Model.CreationDate</h6>
+        <h6 class="text-right">By: @Model.FullName</h6>
 
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
-
             <p class="text-right"><a href="@Url.Action("HouseEdit", "Buy", new { @houseAdId = Model.HouseId})" class="btn btn-success">Edit</a></p>
             <p class="text-right"><a href="@Url.Action("HouseDelete", "Buy", new { @houseAdId = Model.HouseId})" class="btn btn-danger">Delete</a></p>
         }

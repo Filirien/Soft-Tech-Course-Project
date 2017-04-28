@@ -5,30 +5,29 @@
 }
 
 <div class="row mt-60">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <img src="@Model.ImageUrl" class="img-responsive" />
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <p class="text-center breadcrumb">@Model.Address</p>
-        <p class="text-center breadcrumb">Description: @Model.Description</p>
+        <p class="text-center breadcrumb">@Model.Description</p>
         <p class="text-center breadcrumb">Land Area: @Model.Area m&#178;</p>
-        <p class="text-center breadcrumb">Electricity: @Model.Electricity</p>
-        <p class="text-center breadcrumb">Water: @Model.Water</p>
+        <p class="text-center breadcrumb">Electricity: @(Model.Electricity ? "Yes" : "No")</p>
+        <p class="text-center breadcrumb">Water: @(Model.Water ? "Yes" : "No")</p>
 
         @Html.ActionLink("Back", "Lands", null, new { @class = "btn btn-info" })
-
-
     </div>
-    <div class="col-md-3">
-        <p class="text-center breadcrumb">Sewage: @Model.Sewage</p>
+    <div class="col-sm-3">
+        <p class="text-center breadcrumb">Sewage: @(Model.Sewage ? "Yes" : "No")</p>
         <p class="text-center breadcrumb">@Model.Price BGN</p>
         <p class="text-center breadcrumb">Seller email: @Model.SellerName</p>
         <p class="text-center breadcrumb">Seller phone: @Model.SellerPhone</p>
 
+        <h6 class="text-right">Posted on: @Model.CreationDate</h6>
+        <h6 class="text-right">By: @Model.FullName</h6>
 
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
-
             <p class="text-right"><a href="@Url.Action("LandEdit", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-success">Edit</a></p>
             <p class="text-right"><a href="@Url.Action("LandDelete", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-danger">Delete</a></p>
         }

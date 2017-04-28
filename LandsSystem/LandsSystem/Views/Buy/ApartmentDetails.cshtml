@@ -5,11 +5,12 @@
 }
 
 <div class="row mt-60">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <img src="@Model.ImageUrl" class="img-responsive" />
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <p class="text-center breadcrumb">@Model.Address (@Model.YearOfBuilt)</p>
+        <p class="text-center breadcrumb">@Model.Description</p>
         <p class="text-center breadcrumb">Apartment Area: @Model.ApartmentArea m&#178;</p>
         <p class="text-center breadcrumb">Terrace Area: @Model.TerraceArea m&#178;</p>
         <p class="text-center breadcrumb">Floor: @Model.Floor</p>
@@ -18,22 +19,20 @@
         <p class="text-center breadcrumb">Bathrooms: @Model.Bathroom</p>
 
         @Html.ActionLink("Back", "Apartments", null, new { @class = "btn btn-info" })
-
-
     </div>
-    <div class="col-md-3">
-        <p class="text-center breadcrumb">Basement: @Model.HaveBasement</p>
-        <p class="text-center breadcrumb">Elevator: @Model.HaveElevator</p>
-        <p class="text-center breadcrumb">Garage: @Model.HaveGarage</p>
+    <div class="col-sm-3">
+        <p class="text-center breadcrumb">Basement: @(Model.HaveBasement ? "Yes" : "No")</p>
+        <p class="text-center breadcrumb">Elevator: @(Model.HaveElevator ? "Yes" : "No")</p>
+        <p class="text-center breadcrumb">Garage: @(Model.HaveGarage ? "Yes" : "No")</p>
         <p class="text-center breadcrumb">Park Slots: @Model.ParkSlots</p>
-
-
         <p class="text-center breadcrumb">Seller email: @Model.SellerName</p>
         <p class="text-center breadcrumb">Seller phone: @Model.SellerPhone</p>
 
+        <h6 class="text-right">Posted on: @Model.CreationDate</h6>
+        <h6 class="text-right">By: @Model.FullName</h6>
+
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
-
             <p class="text-right"><a href="@Url.Action("ApartmentEdit", "Buy", new { @apartmentAdId = Model.ApartmentAdId})" class="btn btn-success">Edit</a></p>
             <p class="text-right"><a href="@Url.Action("ApartmentDelete", "Buy", new { @apartmentAdId = Model.ApartmentAdId})" class="btn btn-danger">Delete</a></p>
         }

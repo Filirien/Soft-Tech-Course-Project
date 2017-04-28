@@ -1,4 +1,5 @@
 ﻿using LandsSystem.Data;
+using System;
 using System.Collections.Generic;
 
 namespace LandsSystem.Models.BuyDetailsModel
@@ -9,7 +10,11 @@ namespace LandsSystem.Models.BuyDetailsModel
 
         public int HouseAdId { get; set; }
 
+        public DateTime CreationDate { get; set; }
+
         public string SellerId { get; set; }
+
+        public string FullName { get; set; }
 
         public string SellerName { get; set; }
 
