@@ -34,7 +34,7 @@
         [Display(Name = "Have Basement")]
         public bool HaveBasement { get; set; }
 
-        [Display(Name = "Have Elevator")]
+        [Display(Name = "Have Pool")]
         public bool HavePool { get; set; }
 
         [Display(Name = "Have Garage")]
