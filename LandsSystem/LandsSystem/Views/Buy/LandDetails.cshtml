@@ -28,8 +28,12 @@
 
         @if (User.IsInRole("Administrator") || User.Identity.Name == Model.SellerName)
         {
-            <p class="text-right"><a href="@Url.Action("LandEdit", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-success">Edit</a></p>
-            <p class="text-right"><a href="@Url.Action("LandDelete", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-danger">Delete</a></p>
+            <br />
+
+            <p class="text-right">
+                 <a href="@Url.Action("LandEdit", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-success">Edit</a>
+                 <a href="@Url.Action("LandDelete", "Buy", new { @landAdId = Model.LandAdId})" class="btn btn-danger">Delete</a>
+            </p>
         }
     </div>
 </div>
