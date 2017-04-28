@@ -31,6 +31,12 @@ namespace LandsSystem.Controllers
                             h.Seller.FirstName.ToLower().Contains(search.ToLower()));
                 }
 
+                if (user != null)
+                {
+                    housesQuery = housesQuery
+                        .Where(h => h.Seller.UserName == user);
+                }
+
                 var houses = housesQuery
                     .OrderByDescending(h => h.Id)
                     .Skip((page - 1) * pageSize)
@@ -84,6 +90,12 @@ namespace LandsSystem.Controllers
                             a.Seller.FirstName.ToLower().Contains(search.ToLower()));
                 }
 
+                if (user != null)
+                {
+                    apartmentsQuery = apartmentsQuery
+                        .Where(h => h.Seller.UserName == user);
+                }
+
                 var apartments = apartmentsQuery
                     .OrderByDescending(a => a.Id)
                     .Skip((page - 1) * pageSize)
@@ -135,6 +147,12 @@ namespace LandsSystem.Controllers
                     landsQuery = landsQuery
                         .Where(l => l.Land.Address.ToLower().Contains(search.ToLower()) ||
                             l.Seller.FirstName.ToLower().Contains(search.ToLower()));
+                }
+
+                if (user != null)
+                {
+                    landsQuery = landsQuery
+                        .Where(h => h.Seller.UserName == user);
                 }
 
                 var lands = landsQuery

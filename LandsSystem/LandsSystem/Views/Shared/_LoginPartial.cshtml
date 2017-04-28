@@ -7,6 +7,15 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
+            <a href="/Buy/Houses?user=@User.Identity.GetUserName()">My Houses</a>
+        </li>
+        <li>
+            <a href="/Buy/Apartments?user=@User.Identity.GetUserName()">My Apartments</a>
+        </li>
+        <li>
+            <a href="/Buy/Lands?user=@User.Identity.GetUserName()">My Lands</a>
+        </li>
+        <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

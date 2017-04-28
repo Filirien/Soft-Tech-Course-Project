@@ -11,8 +11,14 @@
     <h2 class="text-center">No more houses!</h2>
 }
 
+
 @using (Html.BeginForm("Houses", "Buy", FormMethod.Get))
 {
+    if (Request.QueryString["user"] != null)
+    {
+        @Html.Hidden("user", Request.QueryString["user"])
+    }
+
     <div class="text-center">
         <input type="text" class="form-control" name="search" style="display:inline-block" value="@Request.QueryString["search"]" />
         <input type="submit" value="Search" class="btn btn-success" />
@@ -38,8 +44,17 @@
         </div>
     </div>
 }
+
+@{ 
+    var currentUser = Request.QueryString["user"];
+    var currentSearch = Request.QueryString["search"];
+
+    var currentUserQuery = currentUser != null ? "&user=" + currentUser : string.Empty;
+    var currentSearchQuery = currentUser != null ? "&search=" + currentSearch : string.Empty;
+}
+
 <div class="text-center mt-60">
     @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
-    <a href="/Buy/Houses?page=@(ViewBag.CurrentPage - 1)" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)"><< Previous</a>
-    <a href="/Buy/Houses?page=@(ViewBag.CurrentPage + 1)" class="btn btn-success @(!Model.Any() || Model.Count() < 5 ? "disabled" : string.Empty)">Next >></a>
+    <a href="/Buy/Houses?page=@(ViewBag.CurrentPage - 1)@currentUserQuery@currentSearchQuery" class="btn btn-success @(ViewBag.CurrentPage == 1 ? "disabled" : string.Empty)"><< Previous</a>
+    <a href="/Buy/Houses?page=@(ViewBag.CurrentPage + 1)@currentUserQuery@currentSearchQuery" class="btn btn-success @(!Model.Any() || Model.Count() < 5 ? "disabled" : string.Empty)">Next >></a>
 </div>
